@@ -2,24 +2,18 @@
 
 %define build_mysql 1
 %{?_with_mysql: %global build_mysql 1}
-%define build_freetds 0
-%{?_with_freetds: %global build_freetds 1}
-%define build_mdb 0
-%{?_with_mdb: %global build_mdb 1}
 
-#gw check fails in the BS in 4.1.3
 %define enable_test 1
-%{?_with_mdb: %global enable_test 1}
 
 %define api		5.0
-%define	major 		5
+%define	major 		4
 %define pkgname 	%{name}%{api}
 %define oname 		gda
 
 %define libname		%mklibname %{oname} %{api} %{major} 
-%define	libnamereport	%mklibname %{oname}report %{api} %{major}
-%define	libnameui	%mklibname %{oname}ui %{api} %{major}
-%define	libname_xslt	%mklibname %{oname}-xslt %{api} %{major}
+%define	libnamereport	%mklibname %{oname}-report %{api} %{major}
+%define	libnameui	%mklibname %{oname}-ui %{api} %{major}
+%define	libnamexslt	%mklibname %{oname}-xslt %{api} %{major}
 %define	girname		%mklibname %{oname}-gir %{api}
 %define	girnameui	%mklibname %{oname}ui-gir %{api}
 %define devname		%mklibname -d %{oname} %{api}
@@ -32,7 +26,8 @@ License: 	GPLv2+ and LGPLv2+
 Group: 		Databases
 URL: 		http://www.gnome-db.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
-#Patch0:		libgda-4.2.12-fix-linking.patch
+Patch0:		libgda-5.1.0-string-literal.patch
+Patch1:		libgda-5.1.1-gir.patch
 
 BuildRequires:	bison
 BuildRequires:	flex
@@ -45,25 +40,23 @@ BuildRequires:	postgresql-devel
 BuildRequires:	readline-devel
 BuildRequires:	unixODBC-devel
 BuildRequires:	xbase-devel
-BuildRequires:	pkgconfig(gtk+-2.0)
-BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:	pkgconfig(gnome-doc-utils)
-BuildRequires:	pkgconfig(gnome-vfs-2.0)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(goocanvas-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(gtksourceview-3.0)
 BuildRequires:	pkgconfig(iso-codes)
+BuildRequires:	pkgconfig(libcrypto)
+BuildRequires:	pkgconfig(libgvc)
+BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libxslt)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(sqlite3)
-BuildRequires:	pkgconfig(unique-1.0)
-%ifnarch %arm %mips
-BuildRequires:	java-1.6.0-devel
-%endif
 %if %{build_mysql}
 BuildRequires:	mysql-devel
-%endif
-%if %{build_freetds}
-BuildRequires:	freetds-devel
 %endif
 %if %{enable_test}
 BuildRequires:	pkgconfig(json-glib-1.0)
@@ -111,11 +104,11 @@ Group: 		System/Libraries
 %description -n	%{libnameui}
 This package contains the shared library for %{name}.
 
-%package -n	%{libname_xslt}
+%package -n	%{libnamexslt}
 Summary:	GNU Data Access Development
 Group: 		System/Libraries
 
-%description -n	%{libname_xslt}
+%description -n	%{libnamexslt}
 This package contains the shared library for %{name}.
 
 %package -n %{girname}
@@ -138,7 +131,7 @@ Group: 		Development/Databases
 Requires:	%{libname} = %{version}
 Requires:	%{libnamereport} = %{version}
 Requires:	%{libnameui} = %{version}
-Requires:	%{libname_xslt} = %{version}
+Requires:	%{libnamexslt} = %{version}
 Requires:	%{girname} = %{version}
 Requires:	%{girnameui} = %{version}
 Provides:	%{oname}%{api}-devel = %{version}-%{release}
@@ -172,28 +165,6 @@ Requires:	%{name} = %{version}
 %description -n	%{pkgname}-bdb
 This package includes the GDA Berkeley Database provider.
 
-%if %{build_freetds}
-%package -n	%{pkgname}-freetds
-Summary:	GDA FreeTDS Provider
-Group:		Databases
-Requires:	%{name} = %{version}
-
-%description -n	%{pkgname}-freetds
-This package includes the GDA FreeTDS provider.
-%endif
-
-%if %{build_mdb}
-%package -n	%{pkgname}-mdb
-Summary:	GDA MDB Provider
-Group:		Databases
-Requires:	%{name} = %{version}
-BuildRequires:	libmdbtools-devel
-
-%description -n	%{pkgname}-mdb
-This package includes the GDA MDB provider, which can access
-Microsoft Access databases.
-%endif
-
 %package -n	%{pkgname}-sqlite
 Summary:	GDA sqlite Provider
 Group:		Databases
@@ -202,16 +173,6 @@ Obsoletes:      gda3.0-sqlite
 
 %description -n	%{pkgname}-sqlite
 This package includes the GDA sqlite provider
-
-%ifnarch %arm %mips
-%package -n	%{pkgname}-jdbc
-Summary:	GDA Java Database Provider
-Group:		Databases
-Requires:	%{name} = %{version}
-
-%description -n	%{pkgname}-jdbc
-This package includes the GDA Java Database provider.
-%endif
 
 %package -n	%{pkgname}-ldap
 Summary:	GDA LDAP Provider
@@ -226,28 +187,24 @@ This package includes the GDA LDAP provider
 %apply_patches
 
 %build
-#gw patch0:
-#autoreconf -fi
 %configure2_5x \
 	--disable-static \
+	--enable-introspection=yes \
+	--enable-gda-gi \
+	--enable-gdaui-gi \
+	--enable-system-sqlite \
 %if %build_mysql
 	--with-mysql=yes \
 %endif
-%if !%{build_freetds}
-	--with-tds=no \
-%endif
-%if !%{build_mdb}
-	--with-mdb=no \
-%endif
 	--without-firebird \
-	--with-bdb=%_prefix \
-	--with-bdb-libdir-name=%_lib
+	--with-bdb=%{_prefix} \
+	--with-bdb-libdir-name=%{_lib}
 
-%make
+%make LIBS='-ldl'
 
 %install
 %makeinstall_std
-%find_lang %{name}-%{api} --with-gnome
+%find_lang %{name}-%{api} --with-gnome --all-name
 
 %if %{enable_test}
 %check
@@ -283,7 +240,7 @@ make check
 %files -n %{libnameui}
 %{_libdir}/libgda-ui-%{api}.so.%{major}*
 
-%files -n %{libname_xslt}
+%files -n %{libnamexslt}
 %{_libdir}/libgda-xslt-%{api}.so.%{major}*
 
 %files -n %{girname}
@@ -303,7 +260,6 @@ make check
 %{_includedir}/*
 %{_datadir}/gir-1.0/Gda-%{api}.gir
 %{_datadir}/gir-1.0/Gdaui-%{api}.gir
-%{_datadir}/gnome/help/gda-browser
 
 %files -n %{pkgname}-sqlite
 %{_libdir}/libgda-%{api}/providers/libgda-sqlite.so
@@ -317,22 +273,6 @@ make check
 %if %{build_mysql}
 %files -n %{pkgname}-mysql
 %{_libdir}/libgda-%{api}/providers/libgda-mysql.so
-%endif
-
-%if %{build_freetds}
-%files -n %{pkgname}-freetds
-%{_libdir}/libgda-%{api}/providers/libgda-freetds.so
-%endif
-
-%if %{build_mdb}
-%files -n %{pkgname}-mdb
-%{_libdir}/libgda-%{api}/providers/libgda-mdb.so
-%endif
-
-%ifnarch %arm %mips
-%files -n %{pkgname}-jdbc
-%{_libdir}/libgda-%{api}/providers/libgda-jdbc.so
-%{_libdir}/libgda-%{api}/providers/gdaprovider-%{api}.jar
 %endif
 
 %files -n %{pkgname}-ldap
