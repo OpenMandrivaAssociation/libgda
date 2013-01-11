@@ -6,7 +6,7 @@
 %define enable_test 1
 
 %define api		5.0
-%define	major 		4
+%define	major		4
 %define pkgname 	%{name}%{api}
 %define oname 		gda
 
@@ -136,7 +136,6 @@ Requires:	%{girname} = %{version}
 Requires:	%{girnameui} = %{version}
 Provides:	%{oname}%{api}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-%define _requires_exceptions ^devel.libgda-
 
 %description -n	%{devname}
 This package contains the development files for %{name}.
