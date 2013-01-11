@@ -3,7 +3,7 @@
 %define build_mysql 1
 %{?_with_mysql: %global build_mysql 1}
 
-%define enable_test 1
+%define enable_test 0
 
 %define api		5.0
 %define	major		4
