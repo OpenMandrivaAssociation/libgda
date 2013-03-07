@@ -54,7 +54,7 @@ BuildRequires:	pkgconfig(libsoup-2.4)
 BuildRequires:	pkgconfig(libxslt)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(popt)
-BuildRequires:	pkgconfig(sqlite3)
+BuildRequires:	pkgconfig(sqlite3) >= 3.7.15.2
 %if %{build_mysql}
 BuildRequires:	mysql-devel
 %endif
