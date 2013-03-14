@@ -1,0 +1,12 @@
+--- libgda-5.1.1/configure.ac.bero	2013-03-14 13:19:59.299567288 +0100
++++ libgda-5.1.1/configure.ac	2013-03-14 13:21:32.556401417 +0100
+@@ -293,7 +293,8 @@ dnl Check for Operating System
+ dnl ******************************
+ dnl linklibext is the shared link library extension, which varies by platform
+ 
+-EXPORT_SYM_REGEX='-export-symbols-regex "^(gda_|fnYM49765777344607__gda).*"'
++dnl We need to export some private symbols because they're actually being used by the plugins...
++EXPORT_SYM_REGEX='-export-symbols-regex "^(gda_|fnYM49765777344607__gda|_split_identifier_string|_gda_vconnection_|_gda_server).*"'
+ EXPORT_PROV_SYM_REGEX='-export-symbols-regex "^(plugin_|Java_|g_module|gdaprov_).*"'
+ EXPORT_UI_SYM_REGEX='-export-symbols-regex "^(gdaui_).*"'
+ AC_MSG_CHECKING([for platform])

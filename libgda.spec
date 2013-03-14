@@ -28,6 +28,8 @@ URL: 		http://www.gnome-db.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		libgda-5.1.0-string-literal.patch
 Patch1:		libgda-5.1.1-gir.patch
+Patch2:		libgda-5.1.1-linkage.patch
+Patch3:		libgda-5.1.1-automake-1.13.patch
 
 BuildRequires:	bison
 BuildRequires:	flex
@@ -184,6 +186,9 @@ This package includes the GDA LDAP provider
 %prep
 %setup -q
 %apply_patches
+aclocal
+automake -a
+autoconf
 
 %build
 %configure2_5x \
