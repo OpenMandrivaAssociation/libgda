@@ -88,6 +88,7 @@ access your data.
 %package -n	%{libname}
 Summary:	GNU Data Access Development
 Group: 		System/Libraries
+Provides:	libgda = %EVRD
 
 %description -n	%{libname}
 This package contains the shared library for %{name}.
