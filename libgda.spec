@@ -130,14 +130,14 @@ GObject Introspection interface description for %{name}.
 %package -n	%{devname}
 Summary:	GNU Data Access Development
 Group: 		Development/Databases
-Requires:	%{libname} = %{version}
-Requires:	%{libnamereport} = %{version}
-Requires:	%{libnameui} = %{version}
-Requires:	%{libnamexslt} = %{version}
-Requires:	%{girname} = %{version}
-Requires:	%{girnameui} = %{version}
-Provides:	%{oname}%{api}-devel = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %EVRD
+Requires:	%{libnamereport} = %EVRD
+Requires:	%{libnameui} = %EVRD
+Requires:	%{libnamexslt} = %EVRD
+Requires:	%{girname} = %EVRD
+Requires:	%{girnameui} = %EVRD
+Provides:	%{oname}%{api}-devel = %EVRD
+Provides:	%{name}-devel = %EVRD
 
 %description -n	%{devname}
 This package contains the development files for %{name}.
@@ -145,7 +145,7 @@ This package contains the development files for %{name}.
 %package -n	%{pkgname}-postgres
 Summary:	GDA PostgreSQL Provider
 Group:		Databases
-Requires:	%{name} = %{version}
+Requires:	%{name} = %EVRD
 
 %description -n	%{pkgname}-postgres
 This package includes the GDA PostgreSQL provider
@@ -153,7 +153,7 @@ This package includes the GDA PostgreSQL provider
 %package -n	%{pkgname}-mysql
 Summary:	GDA MySQL Provider
 Group:		Databases
-Requires:	%{name} = %{version}
+Requires:	%{name} = %EVRD
 
 %description -n	%{pkgname}-mysql
 This package includes the GDA MySQL provider
@@ -161,7 +161,7 @@ This package includes the GDA MySQL provider
 %package -n	%{pkgname}-bdb
 Summary:	GDA Berkeley Database Provider
 Group:		Databases
-Requires:	%{name} = %{version}
+Requires:	%{name} = %EVRD
 
 %description -n	%{pkgname}-bdb
 This package includes the GDA Berkeley Database provider.
@@ -169,7 +169,7 @@ This package includes the GDA Berkeley Database provider.
 %package -n	%{pkgname}-sqlite
 Summary:	GDA sqlite Provider
 Group:		Databases
-Requires:	%{name} = %{version}
+Requires:	%{name} = %EVRD
 Obsoletes:      gda3.0-sqlite
 
 %description -n	%{pkgname}-sqlite
@@ -178,7 +178,7 @@ This package includes the GDA sqlite provider
 %package -n	%{pkgname}-ldap
 Summary:	GDA LDAP Provider
 Group:		Databases
-Requires:	%{name} = %{version}
+Requires:	%{name} = %EVRD
 
 %description -n	%{pkgname}-ldap
 This package includes the GDA LDAP provider
