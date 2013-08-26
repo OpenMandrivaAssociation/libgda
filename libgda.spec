@@ -5,26 +5,26 @@
 
 %define enable_test 0
 
-%define api		5.0
-%define	major		4
-%define pkgname 	%{name}%{api}
-%define oname 		gda
+%define api 5.0
+%define major 4
+%define pkgname %{name}%{api}
+%define oname gda
 
-%define libname		%mklibname %{oname} %{api} %{major} 
-%define	libnamereport	%mklibname %{oname}-report %{api} %{major}
-%define	libnameui	%mklibname %{oname}-ui %{api} %{major}
-%define	libnamexslt	%mklibname %{oname}-xslt %{api} %{major}
-%define	girname		%mklibname %{oname}-gir %{api}
-%define	girnameui	%mklibname %{oname}ui-gir %{api}
-%define devname		%mklibname -d %{oname} %{api}
+%define libname %mklibname %{oname} %{api} %{major} 
+%define libnamereport %mklibname %{oname}-report %{api} %{major}
+%define libnameui %mklibname %{oname}-ui %{api} %{major}
+%define libnamexslt %mklibname %{oname}-xslt %{api} %{major}
+%define girname %mklibname %{oname}-gir %{api}
+%define girnameui %mklibname %{oname}ui-gir %{api}
+%define devname %mklibname -d %{oname} %{api}
 
 Summary:	GNU Data Access
-Name: 		libgda
+Name:		libgda
 Version:	5.1.1
-Release:	1
-License: 	GPLv2+ and LGPLv2+
-Group: 		Databases
-Url: 		http://www.gnome-db.org/
+Release:	2
+License:	GPLv2+ and LGPLv2+
+Group:		Databases
+Url:		http://www.gnome-db.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch0:		libgda-5.1.0-string-literal.patch
 Patch1:		libgda-5.1.1-gir.patch
