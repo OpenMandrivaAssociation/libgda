@@ -20,18 +20,17 @@
 
 Summary:	GNU Data Access
 Name:		libgda
-Version:	5.1.1
-Release:	8
+Version:	5.2.1
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Databases
 Url:		http://www.gnome-db.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
-Patch0:		libgda-5.1.0-string-literal.patch
-Patch1:		libgda-5.1.1-gir.patch
-Patch2:		libgda-5.1.1-linkage.patch
-Patch3:		libgda-5.1.1-automake-1.13.patch
+Patch1:		libgda-5.1.1-linkage.patch
+Patch2:		libgda-5.1.2-fix-str-fmt.patch
 
 BuildRequires:	bison
+BuildRequires:	yelp-tools
 BuildRequires:	flex
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
@@ -192,6 +191,7 @@ automake -a
 autoconf
 
 %build
+export CPPFLAGS+=' -I/usr/include/graphviz'
 %configure2_5x \
 	--disable-static \
 	--enable-introspection=yes \
@@ -227,6 +227,7 @@ make check
 %{_datadir}/pixmaps/gda*
 %{_datadir}/icons/hicolor/*/apps/gda-control-center.*
 %{_datadir}/libgda-%{api}
+%exclude %{_datadir}/libgda-%{api}/demo
 %dir %{_libdir}/libgda-%{api}
 %dir %{_libdir}/libgda-%{api}/plugins
 %dir %{_libdir}/libgda-%{api}/providers
@@ -263,6 +264,7 @@ make check
 %{_libdir}/libgda-xslt-%{api}.so
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
+%{_datadir}/libgda-%{api}/demo
 %{_datadir}/gir-1.0/Gda-%{api}.gir
 %{_datadir}/gir-1.0/Gdaui-%{api}.gir
 
