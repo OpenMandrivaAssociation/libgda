@@ -1,0 +1,11 @@
+--- libgda-5.1.2/libgda-ui/demos/ddl_queries.c~	2013-01-19 04:04:40.000000000 +0800
++++ libgda-5.1.2/libgda-ui/demos/ddl_queries.c	2013-05-28 10:15:55.206985362 +0800
+@@ -478,7 +478,7 @@
+ 
+ 		dlg = gtk_message_dialog_new_with_markup (GTK_WINDOW (data->top_window),
+ 							  GTK_DIALOG_MODAL,
+-							  msg_type, GTK_BUTTONS_CLOSE, msg);
++							  msg_type, GTK_BUTTONS_CLOSE, "%s", msg);
+ 		g_free (sql);
+ 		g_free (msg);
+ 
