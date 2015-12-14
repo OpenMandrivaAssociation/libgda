@@ -1,5 +1,7 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
+%define _disable_rebuild_configure 1
+
 %define build_mysql 1
 %{?_with_mysql: %global build_mysql 1}
 
@@ -20,8 +22,8 @@
 
 Summary:	GNU Data Access
 Name:		libgda
-Version:	5.2.2
-Release:	3
+Version:	5.2.4
+Release:	1
 License:	GPLv2+ and LGPLv2+
 Group:		Databases
 Url:		http://www.gnome-db.org/
@@ -236,6 +238,8 @@ make check
 %{_libdir}/libgda-%{api}/providers/libgda-web.so
 %{_libdir}/libgda-%{api}/providers/libgda-sqlcipher.so
 %{_mandir}/man1/*
+%{_datadir}/appdata/gda-browser-5.0.appdata.xml
+
 
 %files -n %{libname}
 %{_libdir}/libgda-%{api}.so.%{major}*

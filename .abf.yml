@@ -1,5 +1,6 @@
 removed_sources:
   libgda-5.1.1.tar.xz: 5e43d3fc9a759bbb07bff910a0bed87a5ee829ab
   libgda-5.2.1.tar.xz: bba6377fe5b69c0a3fe6a6750c7106f9fec8d8d9
-sources:
   libgda-5.2.2.tar.xz: 2b56f6388961bb9dd3a92b6bb2803cab5439597e
+sources:
+  libgda-5.2.4.tar.xz: 9963fe39074f5ece1872387c955e1598f8b872af
