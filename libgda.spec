@@ -8,7 +8,7 @@
 %define enable_test 0
 
 %define api 5.0
-%define major 4
+%define major 5
 %define pkgname %{name}%{api}
 %define oname gda
 
