@@ -58,6 +58,7 @@ BuildRequires:	pkgconfig(libxslt)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(sqlite3) >= 3.7.15.2
+BuildRequires:	pkgconfig(gee-1.0)
 %if %{build_mysql}
 BuildRequires:	mysql-devel
 %endif
