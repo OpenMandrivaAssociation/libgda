@@ -205,8 +205,6 @@ automake -a
 autoconf
 
 %build
-export CC=gcc
-export CXX=g++
 export CPPFLAGS+=' -I/usr/include/graphviz'
 %configure2_5x \
 	--disable-static \
