@@ -59,6 +59,14 @@ BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(sqlite3) >= 3.7.15.2
 BuildRequires:	pkgconfig(gee-1.0)
+BuildRequires:	pkgconfig(glib-2.0) 
+BuildRequires:	pkgconfig(gobject-2.0)
+BuildRequires:	pkgconfig(gthread-2.0)
+BuildRequires:	pkgconfig(json-glib-1.0)
+BuildRequires:	pkgconfig(vapigen)
+BuildRequires:	vala
+BuildRequires:	vala-tools
+
 %if %{build_mysql}
 BuildRequires:	mysql-devel
 %endif
