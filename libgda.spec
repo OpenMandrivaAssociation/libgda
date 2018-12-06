@@ -58,7 +58,8 @@ BuildRequires:	pkgconfig(libxslt)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(popt)
 BuildRequires:	pkgconfig(sqlite3) >= 3.7.15.2
-BuildRequires:	pkgconfig(gee-1.0)
+#BuildRequires:	pkgconfig(gee-1.0)
+BuildRequires:	pkgconfig(gee-0.8)
 BuildRequires:	pkgconfig(glib-2.0) 
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gthread-2.0)
@@ -66,6 +67,8 @@ BuildRequires:	pkgconfig(json-glib-1.0)
 BuildRequires:	pkgconfig(vapigen)
 BuildRequires:	vala
 BuildRequires:	vala-tools
+BuildRequires:	pkgconfig(goocanvas-2.0)
+BuildRequires:	pkgconfig(gio-2.0)
 
 %if %{build_mysql}
 BuildRequires:	mysql-devel
