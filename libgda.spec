@@ -30,6 +30,7 @@ Url:		http://www.gnome-db.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch1:		libgda-5.1.1-linkage.patch
 Patch2:		libgda-5.1.2-fix-str-fmt.patch
+Patch3:		libgda-5.2.8-system-sqlcipher.patch
 
 BuildRequires:	bison
 BuildRequires:	yelp-tools
@@ -199,7 +200,7 @@ This package includes the GDA LDAP provider
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 aclocal
 automake -a
 autoconf
@@ -221,10 +222,10 @@ export CPPFLAGS+=' -I/usr/include/graphviz'
 	--with-bdb=%{_prefix} \
 	--with-bdb-libdir-name=%{_lib}
 
-%make LIBS='-ldl'
+%make_build LIBS='-ldl'
 
 %install
-%makeinstall_std
+%make_install
 %find_lang %{name}-%{api} --with-gnome --all-name
 
 %if %{enable_test}
