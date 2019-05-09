@@ -1,0 +1,15 @@
+--- libgda-5.2.8/providers/sqlcipher/Makefile.am.orig	2019-01-13 21:48:45.140202726 -0500
++++ libgda-5.2.8/providers/sqlcipher/Makefile.am	2019-01-13 21:51:55.421628314 -0500
+@@ -16,12 +16,7 @@ AM_CPPFLAGS = \
+ 	-DSQLITE_HAS_CODEC -DSQLITE_API= -DSQLITE_PRIVATE= -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_THREADSAFE=1
+ 
+ 
+-sqlite_sources = sqlite3.c sqlite3.h
+-
+-libmain.lo: sqlite3.h
+-
+ libgda_sqlcipher_la_SOURCES = \
+-	$(sqlite_sources) \
+ 	libmain.c
+ 
+ libgda_sqlcipher_la_LDFLAGS = -export-dynamic -module -avoid-version $(NO_UNDEFINED) $(LIBTOOL_PROV_EXPORT_OPTIONS)
