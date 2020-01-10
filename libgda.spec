@@ -187,7 +187,7 @@ This package includes the GDA LDAP provider
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 aclocal
 automake -a
 autoconf
