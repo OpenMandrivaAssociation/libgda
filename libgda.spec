@@ -61,10 +61,9 @@ BuildRequires:  pkgconfig(vapigen)
 %if %{build_mysql}
 BuildRequires:	mysql-devel
 %endif
-%if %{enable_test}
-BuildRequires:	pkgconfig(json-glib-1.0)
-BuildRequires:	pkgconfig(check)
-%endif
+
+#BuildRequires:	pkgconfig(json-glib-1.0)
+#BuildRequires:	pkgconfig(check)
 
 Requires:	iso-codes
 
