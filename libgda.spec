@@ -31,6 +31,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{ver
 #Patch1:		libgda-5.1.1-linkage.patch
 #Patch2:		libgda-5.1.2-fix-str-fmt.patch
 
+BuildRequires:	meson
 BuildRequires:	bison
 BuildRequires:	yelp-tools
 BuildRequires:	flex
@@ -188,31 +189,28 @@ This package includes the GDA LDAP provider
 %prep
 %setup -q
 %autopatch -p1
-aclocal
-automake -a
-autoconf
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 export CPPFLAGS+=' -I/usr/include/graphviz'
-%configure2_5x \
-	--disable-static \
-	--enable-introspection=yes \
-	--enable-gda-gi \
-	--enable-gdaui-gi \
-	--enable-system-sqlite \
-%if %build_mysql
-	--with-mysql=yes \
-%endif
-	--without-firebird \
-	--with-bdb=%{_prefix} \
-	--with-bdb-libdir-name=%{_lib}
-
-%make LIBS='-ldl'
+%meson
+%meson_build
+#%configure2_5x \
+#	--disable-static \
+#	--enable-introspection=yes \
+#	--enable-gda-gi \
+#	--enable-gdaui-gi \
+#	--enable-system-sqlite \
+#%if %build_mysql
+#	--with-mysql=yes \
+#%endif
+#	--without-firebird \
+#	--with-bdb=%{_prefix} \
+#	--with-bdb-libdir-name=%{_lib}
 
 %install
-%makeinstall_std
+%meson_install
 %find_lang %{name}-%{api} --with-gnome --all-name
 
 %if %{enable_test}
