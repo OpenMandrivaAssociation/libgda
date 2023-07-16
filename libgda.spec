@@ -5,8 +5,6 @@
 %define build_mysql 1
 %{?_with_mysql: %global build_mysql 1}
 
-%define enable_test 0
-
 %define api 5.0
 %define major 4
 %define pkgname %{name}%{api}
@@ -192,8 +190,6 @@ This package includes the GDA LDAP provider
 %autopatch -p1
 
 %build
-#export CC=gcc
-#export CXX=g++
 export CPPFLAGS+=' -I/usr/include/graphviz'
 %meson
 %meson_build
@@ -213,11 +209,6 @@ export CPPFLAGS+=' -I/usr/include/graphviz'
 %install
 %meson_install
 %find_lang %{name}-%{api} --with-gnome --all-name
-
-%if %{enable_test}
-%check
-make check
-%endif
 
 %files -n %{pkgname} -f %{name}-%{api}.lang
 %doc AUTHORS COPYING README
