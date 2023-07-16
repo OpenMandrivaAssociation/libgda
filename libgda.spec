@@ -192,7 +192,7 @@ This package includes the GDA LDAP provider
 export CPPFLAGS+=' -I/usr/include/graphviz'
 %meson
 %meson_build
-#%configure2_5x \
+#configure2_5x \
 #	--disable-static \
 #	--enable-introspection=yes \
 #	--enable-gda-gi \
