@@ -5,8 +5,8 @@
 %define build_mysql 1
 %{?_with_mysql: %global build_mysql 1}
 
-%define api 5.0
-%define major 4
+%define api 6.0
+%define major 6
 %define pkgname %{name}%{api}
 %define oname gda
 
