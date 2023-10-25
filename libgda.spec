@@ -37,7 +37,7 @@ BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	db-devel
 BuildRequires:	gdbm-devel
-BuildRequires:	openldap-devel
+BuildRequires:	pkgconfig(ldap)
 BuildRequires:	postgresql-devel
 BuildRequires:	readline-devel
 BuildRequires:	unixODBC-devel
