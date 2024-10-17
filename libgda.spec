@@ -26,7 +26,7 @@ Version:	5.2.9
 Release:	2
 License:	GPLv2+ and LGPLv2+
 Group:		Databases
-Url:		http://www.gnome-db.org/
+Url:		https://www.gnome-db.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{version}.tar.xz
 Patch1:		libgda-5.1.1-linkage.patch
 #Patch2:		libgda-5.1.2-fix-str-fmt.patch
