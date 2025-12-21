@@ -31,6 +31,11 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{url_ver}/%{name}-%{ver
 Patch1:		libgda-5.1.1-linkage.patch
 #Patch2:		libgda-5.1.2-fix-str-fmt.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	yelp-tools
 BuildRequires:	flex
