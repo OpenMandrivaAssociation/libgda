@@ -23,7 +23,7 @@
 Summary:	GNU Data Access
 Name:		libgda
 Version:	5.2.9
-Release:	3
+Release:	4
 License:	GPLv2+ and LGPLv2+
 Group:		Databases
 Url:		https://www.gnome-db.org/
