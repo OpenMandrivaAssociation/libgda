@@ -216,10 +216,15 @@ export CPPFLAGS+=' -I/usr/include/graphviz'
 	--with-bdb=%{_prefix} \
 	--with-bdb-libdir-name=%{_lib}
 
-%make LIBS='-ldl'
+# lemon.c is compiled with a bare "gcc -o lemon" and is rejected as C23.
+for f in $(grep -rl -- '-o lemon ' --include='Makefile*' .); do
+	sed -i 's/-o lemon /-std=gnu17 -o lemon /' "$f"
+done
+
+%make LIBS='-ldl' LIBTOOL=slibtool-shared
 
 %install
-%makeinstall_std
+%makeinstall_std LIBTOOL=slibtool-shared
 %find_lang %{name}-%{api} --with-gnome --all-name
 
 %if %{enable_test}
