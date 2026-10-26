@@ -204,9 +204,10 @@ sed -i \
 	-e '/#include <gtksourceview\/gtksourcestyleschememanager.h>/d' \
 	-e '/#include <gtksourceview\/gtksourcestylescheme.h>/d' \
 	libgda-ui/data-entries/plugins/libmain.c
-# The MySQL probe calls printf() without a declaration. C23 rejects that
-# and configure then skips the provider.
+# The MySQL and LDAP probes call printf() without a declaration. C23
+# rejects that and configure then skips the provider.
 sed -i 's/#include <mysql.h>/#include <stdio.h>\n#include <mysql.h>/' m4/mysql.m4
+sed -i 's/#include <ldap.h>/#include <stdio.h>\n#include <ldap.h>/' m4/ldap.m4
 aclocal
 automake -a
 autoconf
@@ -226,7 +227,8 @@ export CPPFLAGS+=' -I/usr/include/graphviz'
 %endif
 	--without-firebird \
 	--with-bdb=%{_prefix} \
-	--with-bdb-libdir-name=%{_lib}
+	--with-bdb-libdir-name=%{_lib} \
+	--with-ldap-libdir-name=%{_lib}
 
 # CC_FOR_BUILD compiles lemon.c. An empty parameter list is (void) in C23.
 find . -name 'Makefile*' -print0 |
