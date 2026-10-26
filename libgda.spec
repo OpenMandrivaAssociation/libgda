@@ -195,6 +195,15 @@ This package includes the GDA LDAP provider
 %prep
 %setup -q
 %autopatch -p1
+# Individual gtksourceview headers no longer declare their API. The
+# language name lookup needs the umbrella header.
+sed -i \
+	-e 's|#include <gtksourceview/gtksourceview.h>|#include <gtksourceview/gtksource.h>|' \
+	-e '/#include <gtksourceview\/gtksourcelanguagemanager.h>/d' \
+	-e '/#include <gtksourceview\/gtksourcebuffer.h>/d' \
+	-e '/#include <gtksourceview\/gtksourcestyleschememanager.h>/d' \
+	-e '/#include <gtksourceview\/gtksourcestylescheme.h>/d' \
+	libgda-ui/data-entries/plugins/libmain.c
 aclocal
 automake -a
 autoconf
