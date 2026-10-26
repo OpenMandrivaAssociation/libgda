@@ -216,10 +216,9 @@ export CPPFLAGS+=' -I/usr/include/graphviz'
 	--with-bdb=%{_prefix} \
 	--with-bdb-libdir-name=%{_lib}
 
-# lemon.c is compiled with a bare "gcc -o lemon" and is rejected as C23.
-for f in $(grep -rl -- '-o lemon ' --include='Makefile*' .); do
-	sed -i 's/-o lemon /-std=gnu17 -o lemon /' "$f"
-done
+# CC_FOR_BUILD compiles lemon.c. An empty parameter list is (void) in C23.
+find . -name 'Makefile*' -print0 |
+	xargs -0 sed -i 's/-o lemon$(EXEEXT_FOR_BUILD)/-std=gnu17 -o lemon$(EXEEXT_FOR_BUILD)/'
 
 %make LIBS='-ldl' LIBTOOL=slibtool-shared
 
