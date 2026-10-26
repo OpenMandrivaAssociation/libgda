@@ -204,6 +204,9 @@ sed -i \
 	-e '/#include <gtksourceview\/gtksourcestyleschememanager.h>/d' \
 	-e '/#include <gtksourceview\/gtksourcestylescheme.h>/d' \
 	libgda-ui/data-entries/plugins/libmain.c
+# The MySQL probe calls printf() without a declaration. C23 rejects that
+# and configure then skips the provider.
+sed -i 's/#include <mysql.h>/#include <stdio.h>\n#include <mysql.h>/' m4/mysql.m4
 aclocal
 automake -a
 autoconf
