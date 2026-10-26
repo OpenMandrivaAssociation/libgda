@@ -1,6 +1,8 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 %define _disable_rebuild_configure 1
+# sqlite virtual tables store a GRecMutex in a GMutex pointer.
+%global optflags %{optflags} -Wno-incompatible-pointer-types
 
 %define build_mysql 1
 %{?_with_mysql: %global build_mysql 1}
